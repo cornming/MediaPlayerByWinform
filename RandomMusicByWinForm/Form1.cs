@@ -26,6 +26,7 @@ namespace RandomMusicByWinForm
         {
             InitializeComponent();
 
+
             _timer.Interval = 500;
             _timer.Tick += _timer_Tick;
 
@@ -44,7 +45,27 @@ namespace RandomMusicByWinForm
             PlayMedia();
         }
 
-        
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+                Console.WriteLine(keyData.ToString());
+            if (keyData == (Keys.MediaPlayPause))
+            {
+                pasueOrPlayBtn_Click(null, null);
+                return true;
+            }
+            if(keyData.ToString() == "Right, Control" || keyData.ToString() == "Down, Control")
+            {
+                nextBtn_Click(null, null);
+                return true;
+            }
+            if (keyData.ToString() == "Left, Control" || keyData.ToString() == "Up, Control")
+            {
+                prevBtn_Click(null, null);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
 
         private void TrackBar1_MouseCaptureChanged(object sender, EventArgs e)
         {
@@ -209,6 +230,29 @@ namespace RandomMusicByWinForm
         private void RandomPlayBtn_Click(object sender, EventArgs e)
         {
             PlayMedia();
+        }
+
+        private void nextBtn_Click(object sender, EventArgs e)
+        {
+            // Jump to next track
+            _player.controls.next();
+        }
+
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+            // Jump to previous track
+            _player.controls.previous();
+        }
+
+        private void pasueOrPlayBtn_Click(object sender, EventArgs e)
+        {
+            // Play or Pause music
+            if(pasueOrPlayBtn.Text == "暫停")
+                _player.controls.pause();
+            else
+                _player.controls.play();
+
+            pasueOrPlayBtn.Text = pasueOrPlayBtn.Text == "暫停" ? "繼續播放" : "暫停";
         }
     }
 }

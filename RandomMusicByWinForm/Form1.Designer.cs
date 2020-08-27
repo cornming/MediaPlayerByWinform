@@ -35,6 +35,9 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.RandomPlayBtn = new System.Windows.Forms.Button();
+            this.prevBtn = new System.Windows.Forms.Button();
+            this.nextBtn = new System.Windows.Forms.Button();
+            this.pasueOrPlayBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,6 +103,36 @@
             this.RandomPlayBtn.UseVisualStyleBackColor = true;
             this.RandomPlayBtn.Click += new System.EventHandler(this.RandomPlayBtn_Click);
             // 
+            // prevBtn
+            // 
+            this.prevBtn.Location = new System.Drawing.Point(44, 415);
+            this.prevBtn.Name = "prevBtn";
+            this.prevBtn.Size = new System.Drawing.Size(75, 23);
+            this.prevBtn.TabIndex = 0;
+            this.prevBtn.Text = "上一首";
+            this.prevBtn.UseVisualStyleBackColor = true;
+            this.prevBtn.Click += new System.EventHandler(this.prevBtn_Click);
+            // 
+            // nextBtn
+            // 
+            this.nextBtn.Location = new System.Drawing.Point(125, 415);
+            this.nextBtn.Name = "nextBtn";
+            this.nextBtn.Size = new System.Drawing.Size(75, 23);
+            this.nextBtn.TabIndex = 0;
+            this.nextBtn.Text = "下一首";
+            this.nextBtn.UseVisualStyleBackColor = true;
+            this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
+            // 
+            // pasueOrPlayBtn
+            // 
+            this.pasueOrPlayBtn.Location = new System.Drawing.Point(365, 386);
+            this.pasueOrPlayBtn.Name = "pasueOrPlayBtn";
+            this.pasueOrPlayBtn.Size = new System.Drawing.Size(75, 23);
+            this.pasueOrPlayBtn.TabIndex = 0;
+            this.pasueOrPlayBtn.Text = "暫停";
+            this.pasueOrPlayBtn.UseVisualStyleBackColor = true;
+            this.pasueOrPlayBtn.Click += new System.EventHandler(this.pasueOrPlayBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -110,7 +143,10 @@
             this.Controls.Add(this.CurrentPlayNameLabel);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.InfoLabel);
+            this.Controls.Add(this.nextBtn);
+            this.Controls.Add(this.prevBtn);
             this.Controls.Add(this.RandomPlayBtn);
+            this.Controls.Add(this.pasueOrPlayBtn);
             this.Controls.Add(this.PlayBtn);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -129,6 +165,9 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button RandomPlayBtn;
+        private System.Windows.Forms.Button prevBtn;
+        private System.Windows.Forms.Button nextBtn;
+        private System.Windows.Forms.Button pasueOrPlayBtn;
     }
 }
 
