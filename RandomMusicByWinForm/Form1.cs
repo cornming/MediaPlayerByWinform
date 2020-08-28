@@ -16,12 +16,12 @@ namespace RandomMusicByWinForm
     public partial class Form1 : Form
     {
         WindowsMediaPlayer _player = new WMPLib.WindowsMediaPlayer();
-            
+
         WMPLib.IWMPMedia media;
         Timer _timer = new Timer();
         List<string> _listUrl = new List<string>();
 
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -47,13 +47,13 @@ namespace RandomMusicByWinForm
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-                Console.WriteLine(keyData.ToString());
+            Console.WriteLine(keyData.ToString());
             if (keyData == (Keys.MediaPlayPause))
             {
                 pasueOrPlayBtn_Click(null, null);
                 return true;
             }
-            if(keyData.ToString() == "Right, Control" || keyData.ToString() == "Down, Control")
+            if (keyData.ToString() == "Right, Control" || keyData.ToString() == "Down, Control")
             {
                 nextBtn_Click(null, null);
                 return true;
@@ -77,17 +77,17 @@ namespace RandomMusicByWinForm
             _player.controls.currentPosition = trackBar1.Value;
         }
 
-      
+
 
         private void _timer_Tick(object sender, EventArgs e)
         {
+            bool IsParseDuration = int.TryParse(_player.currentMedia.duration.ToString(), out int duration);
+            bool IsParsePostition = int.TryParse(_player.controls.currentPosition.ToString(), out int postition);
+
             double t = Math.Floor(_player.currentMedia.duration - _player.controls.currentPosition);
-            this.InfoLabel.Text = $"t=>{t.ToString()} ,duration=>{ (int)_player.currentMedia.duration} ,currentPosition=>{(int)(_player.controls.currentPosition)}";
-
-            this.trackBar1.Maximum = this.progressBar1.Maximum = (int)_player.currentMedia.duration;
-            this.trackBar1.Value = this.progressBar1.Value = (int)(_player.controls.currentPosition);
-
-           
+            this.InfoLabel.Text = $"t=>{t.ToString()} ,duration=>{ (IsParseDuration ? duration : 0) } ,currentPosition=>{(IsParsePostition ? postition : 0)}";
+            this.trackBar1.Maximum = this.progressBar1.Maximum = (IsParseDuration ? duration : 0);
+            this.trackBar1.Value = this.progressBar1.Value = (IsParsePostition ? postition : 0);
         }
 
         private void Player_PlayStateChange(int NewState)
@@ -183,7 +183,7 @@ namespace RandomMusicByWinForm
             _player.controls.play();
 
 
-           
+
         }
 
         private void _player_CurrentItemChange(object pdispMedia)
@@ -200,7 +200,7 @@ namespace RandomMusicByWinForm
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
-            if(_player != null)
+            if (_player != null)
             {
                 _player.close();
                 _timer.Stop();
@@ -247,7 +247,7 @@ namespace RandomMusicByWinForm
         private void pasueOrPlayBtn_Click(object sender, EventArgs e)
         {
             // Play or Pause music
-            if(pasueOrPlayBtn.Text == "暫停")
+            if (pasueOrPlayBtn.Text == "暫停")
                 _player.controls.pause();
             else
                 _player.controls.play();
