@@ -81,13 +81,24 @@ namespace RandomMusicByWinForm
 
         private void _timer_Tick(object sender, EventArgs e)
         {
-            bool IsParseDuration = int.TryParse(_player.currentMedia.duration.ToString(), out int duration);
-            bool IsParsePostition = int.TryParse(_player.controls.currentPosition.ToString(), out int postition);
+            int duration = 0, postition = 0;
+            try
+            {
+                duration = (int)_player.currentMedia.duration;
+                postition = (int)_player.controls.currentPosition;
+            }
+            catch (OverflowException)
+            {
+                duration = 0;
+                postition = 0;
+            }
+           
+            Console.WriteLine($@"{_player.currentMedia.duration.ToString()} {duration},{_player.controls.currentPosition.ToString()} {postition}");
 
             double t = Math.Floor(_player.currentMedia.duration - _player.controls.currentPosition);
-            this.InfoLabel.Text = $"t=>{t.ToString()} ,duration=>{ (IsParseDuration ? duration : 0) } ,currentPosition=>{(IsParsePostition ? postition : 0)}";
-            this.trackBar1.Maximum = this.progressBar1.Maximum = (IsParseDuration ? duration : 0);
-            this.trackBar1.Value = this.progressBar1.Value = (IsParsePostition ? postition : 0);
+            this.InfoLabel.Text = $"t=>{t.ToString()} ,duration=>{duration} ,currentPosition=>{postition}";
+            this.trackBar1.Maximum = this.progressBar1.Maximum = duration;
+            this.trackBar1.Value = this.progressBar1.Value = postition;
         }
 
         private void Player_PlayStateChange(int NewState)
