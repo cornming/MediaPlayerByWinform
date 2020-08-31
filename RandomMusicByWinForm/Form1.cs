@@ -82,23 +82,16 @@ namespace RandomMusicByWinForm
         private void _timer_Tick(object sender, EventArgs e)
         {
             int duration = 0, postition = 0;
-            try
-            {
-                duration = (int)_player.currentMedia.duration;
-                postition = (int)_player.controls.currentPosition;
-            }
-            catch (OverflowException)
-            {
-                duration = 0;
-                postition = 0;
-            }
+
+            duration = (int)_player.currentMedia.duration;
+            postition = (int)_player.controls.currentPosition;
            
-            Console.WriteLine($@"{_player.currentMedia.duration.ToString()} {duration},{_player.controls.currentPosition.ToString()} {postition}");
+            //Console.WriteLine($@"{_player.currentMedia.duration.ToString()} {duration},{_player.controls.currentPosition.ToString()} {postition}");
 
             double t = Math.Floor(_player.currentMedia.duration - _player.controls.currentPosition);
             this.InfoLabel.Text = $"t=>{t.ToString()} ,duration=>{duration} ,currentPosition=>{postition}";
             this.trackBar1.Maximum = this.progressBar1.Maximum = duration;
-            this.trackBar1.Value = this.progressBar1.Value = postition;
+            this.trackBar1.Value = this.progressBar1.Value = postition > duration ? duration: postition;
         }
 
         private void Player_PlayStateChange(int NewState)
