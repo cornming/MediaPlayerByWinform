@@ -22,18 +22,31 @@ namespace RandomMusicByWinForm
                 //先找出所有目錄 
                 foreach (string d in Directory.GetDirectories(sDir))
                 {
-                    //先針對目前目路的檔案做處理 
-                    foreach (string f in Directory.GetFiles(d, typeDir))
-                    {
-                            fileUrls.Add(f); 
-                    }
+                    GetCurrentFiles(typeDir, fileUrls, d);
                     //此目錄處理完再針對每個子目錄做處理 
                     DirSearch(d, typeDir, ref fileUrls);
                 }
+
+                GetCurrentFiles(typeDir, fileUrls, sDir);
             }
             catch (System.Exception excpt)
             {
                 Console.WriteLine(excpt.Message);
+            }
+        }
+
+        /// <summary>
+        /// 針對目前目路的檔案做處理 
+        /// </summary>
+        /// <param name="typeDir"></param>
+        /// <param name="fileUrls"></param>
+        /// <param name="d"></param>
+        private static void GetCurrentFiles(string typeDir, List<string> fileUrls, string d)
+        {
+            //針對目前目路的檔案做處理 
+            foreach (string f in Directory.GetFiles(d, typeDir))
+            {
+                fileUrls.Add(f);
             }
         }
     }

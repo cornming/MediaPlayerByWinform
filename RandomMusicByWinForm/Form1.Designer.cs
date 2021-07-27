@@ -38,6 +38,7 @@
             this.prevBtn = new System.Windows.Forms.Button();
             this.nextBtn = new System.Windows.Forms.Button();
             this.pasueOrPlayBtn = new System.Windows.Forms.Button();
+            this.LocalUrl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,7 +72,7 @@
             this.CurrentPlayNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CurrentPlayNameLabel.AutoSize = true;
             this.CurrentPlayNameLabel.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.CurrentPlayNameLabel.Location = new System.Drawing.Point(10, 260);
+            this.CurrentPlayNameLabel.Location = new System.Drawing.Point(10, 276);
             this.CurrentPlayNameLabel.Name = "CurrentPlayNameLabel";
             this.CurrentPlayNameLabel.Size = new System.Drawing.Size(0, 26);
             this.CurrentPlayNameLabel.TabIndex = 3;
@@ -133,11 +134,22 @@
             this.pasueOrPlayBtn.UseVisualStyleBackColor = true;
             this.pasueOrPlayBtn.Click += new System.EventHandler(this.pasueOrPlayBtn_Click);
             // 
+            // LocalUrl
+            // 
+            this.LocalUrl.AutoSize = true;
+            this.LocalUrl.Location = new System.Drawing.Point(10, 454);
+            this.LocalUrl.Name = "LocalUrl";
+            this.LocalUrl.Size = new System.Drawing.Size(53, 12);
+            this.LocalUrl.TabIndex = 6;
+            this.LocalUrl.Text = "目前路徑";
+            this.LocalUrl.Click += new System.EventHandler(this.LocalUrl_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 482);
+            this.Controls.Add(this.LocalUrl);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.CurrentPlayNameLabel);
@@ -149,7 +161,7 @@
             this.Controls.Add(this.pasueOrPlayBtn);
             this.Controls.Add(this.PlayBtn);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "米哥音樂播放器";
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -168,6 +180,7 @@
         private System.Windows.Forms.Button prevBtn;
         private System.Windows.Forms.Button nextBtn;
         private System.Windows.Forms.Button pasueOrPlayBtn;
+        private System.Windows.Forms.Label LocalUrl;
     }
 }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -36,8 +37,9 @@ namespace RandomMusicByWinForm
             this.trackBar1.MouseDown += TrackBar1_MouseDown;
             this.trackBar1.MouseCaptureChanged += TrackBar1_MouseCaptureChanged;
 
-            string applicationStartUrl = Application.StartupPath;
+            string applicationStartUrl = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
             string directoryPath = Path.GetDirectoryName(applicationStartUrl);
+            this.LocalUrl.Text = directoryPath + "\\";
             DirectoryHelper.DirSearch(directoryPath, "*.mp3", ref _listUrl);
             this.listBox1.DataSource = _listUrl;
 
@@ -85,13 +87,13 @@ namespace RandomMusicByWinForm
 
             duration = (int)_player.currentMedia.duration;
             postition = (int)_player.controls.currentPosition;
-           
+
             //Console.WriteLine($@"{_player.currentMedia.duration.ToString()} {duration},{_player.controls.currentPosition.ToString()} {postition}");
 
             double t = Math.Floor(_player.currentMedia.duration - _player.controls.currentPosition);
             this.InfoLabel.Text = $"t=>{t.ToString()} ,duration=>{duration} ,currentPosition=>{postition}";
             this.trackBar1.Maximum = this.progressBar1.Maximum = duration;
-            this.trackBar1.Value = this.progressBar1.Value = postition > duration ? duration: postition;
+            this.trackBar1.Value = this.progressBar1.Value = postition > duration ? duration : postition;
         }
 
         private void Player_PlayStateChange(int NewState)
@@ -257,6 +259,15 @@ namespace RandomMusicByWinForm
                 _player.controls.play();
 
             pasueOrPlayBtn.Text = pasueOrPlayBtn.Text == "暫停" ? "繼續播放" : "暫停";
+        }
+
+        private void LocalUrl_Click(object sender, EventArgs e)
+        {
+            string localUrl = LocalUrl.Text;
+            if (!string.IsNullOrEmpty(localUrl))
+            {
+                Process.Start(localUrl);
+            }
         }
     }
 }
